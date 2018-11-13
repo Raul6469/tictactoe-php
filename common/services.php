@@ -7,10 +7,13 @@ class Services {
     require_once("common/soap-client.php");
   
     $result = $soapClient->showOpenGames()->return;
-  
-    $gamesString = explode("\n", $result);
-    
     $games = array();
+
+    if (strpos($result, 'ERROR') !== false) {
+      return $games;
+    }
+
+    $gamesString = explode("\n", $result);
     
     foreach($gamesString as $gameString) {
       $game = new Game();
