@@ -3,6 +3,10 @@
   if(!isset($_SESSION["user_id"])) {
     header('Location: login.php');
   }
+
+  require_once("common/services.php");
+
+  $openGames = Services::showOpenGames();
 ?>
 
 <!doctype html>
@@ -29,6 +33,30 @@
         <a type="button" href="actions/create-game.php" class="btn btn-success float-md-right">New game</a>
       </div>
 
+      <h2>Open games</h2>
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col" class="join-col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          foreach($openGames as $openGame) {
+            ?>
+              <tr>
+                <th scope="row"><?php echo $openGame->id ?></th>
+                <td><?php echo $openGame->p1 ?></td>
+                <td><button type="button" class="btn btn-outline-primary btn-sm float-md-right">Join</button></td>
+              </tr>
+            <?php
+          }
+        ?>
+      </tbody>
+    </table>
+      
     </div>
   </body>
 
