@@ -18,9 +18,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Tic tac toe</a>
-    </nav>
+    <?php include("components/navbar.php") ?> 
   
     <div class="container">
       <h1>Welcome!</h1>
