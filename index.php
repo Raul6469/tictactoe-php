@@ -22,6 +22,13 @@
   
     <div class="container">
       <h1>Welcome!</h1>
+      <div class="top-buttons">
+        <button type="button" class="btn btn-info">Your statistics</button>
+        <button type="button" class="btn btn-secondary">Leaderboard</button>
+
+        <a type="button" href="actions/create-game.php" class="btn btn-success float-md-right">New game</a>
+      </div>
+
     </div>
   </body>
 
