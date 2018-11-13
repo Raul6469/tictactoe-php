@@ -8,7 +8,7 @@ $params = array(
 
 $result = $soapClient->login($params)->return;
 
-if ($result == "-1") {
+if ($result == "-1" || $result == "0") {
   header('Location: ../login.php?err=-1');
 } else {
   $_SESSION['user_id'] = $result;
