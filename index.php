@@ -49,7 +49,7 @@
               <tr>
                 <th scope="row"><?php echo $openGame->id ?></th>
                 <td><?php echo $openGame->p1 ?></td>
-                <td><button type="button" class="btn btn-outline-primary btn-sm float-md-right">Join</button></td>
+                <td><a type="button" href="game.php?gid=<?php echo $openGame->id ?>" class="btn btn-outline-primary btn-sm float-md-right">Join</a></td>
               </tr>
             <?php
           }

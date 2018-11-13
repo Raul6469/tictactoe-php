@@ -27,4 +27,18 @@ class Services {
   
     return $games;
   }
+
+  public static function joinGame($uid, $gid) {
+    require_once("common/soap-client.php");
+
+    $params = array(
+      "uid" => $uid,
+      "gid" => $gid,
+    );
+
+    $result = $soapClient->joinGame($params)->return;
+
+    return $result;
+  }
+
 }
