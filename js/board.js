@@ -1,6 +1,6 @@
 let url;
 let gid;
-let status;
+let globalState;
 
 $("document").ready(() => {
   url = new URL(window.location.href);
@@ -25,21 +25,21 @@ function updateBoardDisplay() {
 
 function updateGameStatus() {
   $.get("ajax/game-state.php?gid=" + gid , function( data ) {
-    status = data;
+    globalState = data;
     const statusBox = $("#status");
-    if(status === "-1") {
+    if(globalState === "-1") {
       statusBox.show();
       statusBox.text("Waiting for second player to join...")
-    } else if (status === "0") {
+    } else if (globalState === "0") {
       $(".board-container").show();
       statusBox.hide();
-    } else if (status === "1") {
+    } else if (globalState === "1") {
       statusBox.show();
       statusBox.text("You won!");
-    } else if (status === "2") {
+    } else if (globalState === "2") {
       statusBox.show();
       statusBox.text("You lost");
-    } else if (status === "3") {
+    } else if (globalState === "3") {
       statusBox.show();
       statusBox.text("Draw!");
     } else {
