@@ -19,6 +19,7 @@ function updateBoardDisplay() {
     data.forEach(move => {
       $("td[x="+move.x+"][y="+move.y+"]").text("X");
     });
+    checkWin();
     setTimeout(updateBoardDisplay, 1000);
   });
 }
@@ -59,6 +60,25 @@ function takeSquare(x, y) {
   }
 
   $.post("ajax/take-square.php", payload, (response) => {
+    console.log(response)
+  })
+}
+
+function checkWin() {
+  $.get("ajax/check-win.php?gid=" + gid, (response) => {
+    if (response !== globalState) {
+      setGameState(response);
+    }
+  })
+}
+
+function setGameState(state) {
+  const payload = {
+    gstate: state,
+    gid: gid
+  }
+
+  $.post("ajax/set-game-state.php", payload, (response) => {
     console.log(response)
   })
 }
