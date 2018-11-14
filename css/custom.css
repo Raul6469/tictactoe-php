@@ -9,3 +9,22 @@
 .join-col {
     width: 10px;
 }
+
+.board-container {
+    text-align: center;
+    width:100%;
+    height:100%;
+}
+
+.game {
+    width: 300px;
+    margin: 0px auto;
+}
+
+.game > tbody > tr > td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 300%;
+}
