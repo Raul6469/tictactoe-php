@@ -10,6 +10,14 @@
     width: 10px;
 }
 
+#status {
+    display: none;
+}
+
+.board-container {
+    display: none;
+}
+
 .board-container {
     text-align: center;
     width:100%;

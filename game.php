@@ -30,7 +30,10 @@
   
     <div class="container">
       <h1>Play game</h1>
-      <div class="board-container">
+
+      <div class="alert alert-primary" id="status" role="alert"></div>
+
+      <div class="board-container" style="display: none;">
         <table class="table table-bordered game">
           <tbody>
             <tr>
