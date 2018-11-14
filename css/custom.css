@@ -29,7 +29,7 @@
     margin: 0px auto;
 }
 
-.game > tbody > tr > td {
+.square {
     width: 100px;
     height: 100px;
     text-align: center;

@@ -37,19 +37,19 @@
         <table class="table table-bordered game">
           <tbody>
             <tr>
-              <td x="0" y="0"></td>
-              <td x="1" y="0"></td>
-              <td x="2" y="0"></td>
+              <td class="square" x="0" y="0"></td>
+              <td class="square" x="1" y="0"></td>
+              <td class="square" x="2" y="0"></td>
             </tr>
             <tr>
-              <td x="0" y="1"></td>
-              <td x="1" y="1"></td>
-              <td x="2" y="1"></td>
+              <td class="square" x="0" y="1"></td>
+              <td class="square" x="1" y="1"></td>
+              <td class="square" x="2" y="1"></td>
             </tr>
             <tr>
-              <td x="0" y="2"></td>
-              <td x="1" y="2"></td>
-              <td x="2" y="2"></td>
+              <td class="square" x="0" y="2"></td>
+              <td class="square" x="1" y="2"></td>
+              <td class="square" x="2" y="2"></td>
             </tr>
           </tbody>
         </table>
