@@ -13,7 +13,8 @@ function updateBoardDisplay() {
     data.forEach(move => {
       $("td[x="+move.x+"][y="+move.y+"]").text("X");
     });
+    setTimeout(updateBoardDisplay, 1000);
   });
+}
 
-  setTimeout(updateBoardDisplay, 1000);
 }
