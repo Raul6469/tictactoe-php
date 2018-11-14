@@ -6,6 +6,10 @@ $("document").ready(() => {
   url = new URL(window.location.href);
   gid = url.searchParams.get("gid");
 
+  $(".square").click((square) => {
+    takeSquare(square.target.attributes.getNamedItem("x").value, square.target.attributes.getNamedItem("y").value);
+  })
+
   updateBoardDisplay();
   updateGameStatus();
 })
@@ -45,4 +49,16 @@ function updateGameStatus() {
     
     setTimeout(updateGameStatus, 1000);
   });
+}
+
+function takeSquare(x, y) {
+  const payload = {
+    x: x,
+    y: y,
+    gid: gid
+  }
+
+  $.post("ajax/take-square.php", payload, (response) => {
+    console.log(response)
+  })
 }
