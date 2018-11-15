@@ -2,10 +2,15 @@ let url;
 let gid;
 let globalState;
 let globalUser;
+let playerNumber;
 
 $("document").ready(() => {
   url = new URL(window.location.href);
   gid = url.searchParams.get("gid");
+
+  if(url.searchParams.get("host") === "true") {
+    playerNumber = "1";
+  }
 
   $.get("ajax/get-user.php", (user) => {
     globalUser = user;
@@ -52,10 +57,10 @@ function updateGameStatus() {
     } else if (globalState === "0") {
       $(".board-container").show();
       statusBox.hide();
-    } else if (globalState === "1") {
+    } else if (globalState === playerNumber) {
       statusBox.show();
       statusBox.text("You won!");
-    } else if (globalState === "2") {
+    } else if (globalState !== playerNumber) {
       statusBox.show();
       statusBox.text("You lost");
     } else if (globalState === "3") {

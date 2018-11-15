@@ -12,5 +12,5 @@ $result = $soapClient->newGame($params)->return;
 if (strpos($result, 'ERROR') !== false) {
   header('Location: ../index.php?err='.$result);
 } else {
-  header('Location: ../game.php?gid='.$result);
+  header('Location: ../game.php?gid='.$result."&host=true");
 }
