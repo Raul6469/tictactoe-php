@@ -1,25 +1,43 @@
 let url;
 let gid;
 let globalState;
+let globalUser;
 
 $("document").ready(() => {
   url = new URL(window.location.href);
   gid = url.searchParams.get("gid");
 
-  $(".square").click((square) => {
-    takeSquare(square.target.attributes.getNamedItem("x").value, square.target.attributes.getNamedItem("y").value);
-  })
+  $.get("ajax/get-user.php", (user) => {
+    globalUser = user;
 
-  updateBoardDisplay();
-  updateGameStatus();
+    $(".square").click((square) => {
+      takeSquare(square.target.attributes.getNamedItem("x").value, square.target.attributes.getNamedItem("y").value);
+    })
+  
+    updateGameStatus();
+    updateBoardDisplay();
+  })
 })
 
 function updateBoardDisplay() {
   $.get("ajax/board.php?gid=" + gid , function( data ) {
+    let updated = false;
     data.forEach(move => {
-      $("td[x="+move.x+"][y="+move.y+"]").text("X");
+      const square = $("td[x="+move.x+"][y="+move.y+"]");
+      if(square.text() === "") {
+        updated = true;
+        if(move.pid === globalUser) {
+          square.text("X");
+        } else {
+          square.text("O");
+        }
+      }
     });
-    checkWin();
+
+    if(updated) {
+      checkWin();
+    }
+    
     setTimeout(updateBoardDisplay, 1000);
   });
 }
@@ -80,5 +98,11 @@ function setGameState(state) {
 
   $.post("ajax/set-game-state.php", payload, (response) => {
     console.log(response)
+  })
+}
+
+function getLoggedUser() {
+  $.get("ajax/get-user.php", payload, (response) => {
+    userId = response;
   })
 }
