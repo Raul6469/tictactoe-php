@@ -46,6 +46,12 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="collapse" id="turn-indicator">
+          <div class="card card-body">
+            Your turn!
+          </div>
+        </div>
       </div>
 
     </div>

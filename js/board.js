@@ -12,6 +12,7 @@ $("document").ready(() => {
   if(url.searchParams.get("host") === "true") {
     playerNumber = "1";
     isActivePlayer = true;
+    $("#turn-indicator").collapse("show");
   }
 
   $.get("ajax/get-user.php", (user) => {
@@ -47,8 +48,10 @@ function updateBoardDisplay() {
     if(data.length > 0) {
       if(data[data.length - 1].pid === globalUser) {
         isActivePlayer = false;
+        $("#turn-indicator").collapse("hide");
       } else {
         isActivePlayer = true;
+        $("#turn-indicator").collapse("show");
       }
     }
 

@@ -36,3 +36,13 @@
     vertical-align: middle;
     font-size: 300%;
 }
+
+#turn-indicator {
+    width: 300px;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+
+#turn-indicator > .card {
+    background-color: #74e7ff;
+}
