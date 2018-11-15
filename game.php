@@ -3,14 +3,6 @@
   if(!isset($_SESSION["user_id"])) {
     header('Location: login.php');
   }
-
-  require_once("common/services.php");
-
-  $joinGameResult = Services::joinGame($_SESSION["user_id"], $_GET["gid"]);
-
-  if (strpos($joinGameResult, 'ERROR') !== false) {
-    header('Location: ../index.php?err=join');
-  }
 ?>
 
 <!doctype html>
