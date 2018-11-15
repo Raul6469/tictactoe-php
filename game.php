@@ -23,6 +23,7 @@
     <div class="container">
       <h1>Play game</h1>
 
+      <div class="alert alert-primary" id="wait" role="alert">Waiting for second player to join...</div>
       <div class="alert alert-primary" id="status" role="alert"></div>
 
       <div class="board-container" style="display: none;">

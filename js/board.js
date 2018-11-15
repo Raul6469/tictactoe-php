@@ -64,24 +64,28 @@ function updateGameStatus() {
   $.get("ajax/game-state.php?gid=" + gid , function( data ) {
     globalState = data;
     const statusBox = $("#status");
-    if(globalState === "-1") {
-      statusBox.show();
-      statusBox.text("Waiting for second player to join...")
+    if (globalState === "-1") {
+      // We wait
     } else if (globalState === "0") {
+      $("#wait").hide();
       $(".board-container").show();
       statusBox.hide();
     } else if (globalState === "3") {
-      statusBox.show();
+      statusBox.addClass("alert-info");
       statusBox.text("Draw!");
+      statusBox.show();
     } else if (globalState === playerNumber) {
-      statusBox.show();
+      statusBox.addClass("alert-success");
       statusBox.text("You won!");
+      statusBox.show();
     } else if (globalState !== playerNumber) {
-      statusBox.show();
+      statusBox.addClass("alert-danger");
       statusBox.text("You lost");
-    } else {
       statusBox.show();
+    } else {
+      statusBox.addClass("alert-dark");
       statusBox.text("Error: " + status);
+      statusBox.show();
     }
     
     setTimeout(updateGameStatus, 1000);
