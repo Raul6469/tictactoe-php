@@ -15,7 +15,7 @@
 
     $result = $soapClient->getBoard($params)->return;
 
-    $moves = array(array());
+    $moves = array();
 
     if($result == "ERROR-NOMOVES") {
       return $moves;
@@ -26,8 +26,6 @@
     }
 
     $moveStrings = explode("\n", $result);
-
-    $moves = array();
 
     foreach($moveStrings as $moveString) {
       $moveElems = explode(",", $moveString);
