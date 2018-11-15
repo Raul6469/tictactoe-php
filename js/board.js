@@ -70,15 +70,15 @@ function updateGameStatus() {
     } else if (globalState === "0") {
       $(".board-container").show();
       statusBox.hide();
+    } else if (globalState === "3") {
+      statusBox.show();
+      statusBox.text("Draw!");
     } else if (globalState === playerNumber) {
       statusBox.show();
       statusBox.text("You won!");
     } else if (globalState !== playerNumber) {
       statusBox.show();
       statusBox.text("You lost");
-    } else if (globalState === "3") {
-      statusBox.show();
-      statusBox.text("Draw!");
     } else {
       statusBox.show();
       statusBox.text("Error: " + status);
