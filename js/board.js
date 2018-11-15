@@ -3,6 +3,7 @@ let gid;
 let globalState;
 let globalUser;
 let playerNumber;
+let isActivePlayer = false;
 
 $("document").ready(() => {
   url = new URL(window.location.href);
@@ -10,12 +11,16 @@ $("document").ready(() => {
 
   if(url.searchParams.get("host") === "true") {
     playerNumber = "1";
+    isActivePlayer = true;
   }
 
   $.get("ajax/get-user.php", (user) => {
     globalUser = user;
 
     $(".square").click((square) => {
+      if(!isActivePlayer) {
+        return;
+      }
       takeSquare(square.target.attributes.getNamedItem("x").value, square.target.attributes.getNamedItem("y").value);
     })
   
@@ -38,6 +43,14 @@ function updateBoardDisplay() {
         }
       }
     });
+
+    if(data.length > 0) {
+      if(data[data.length - 1].pid === globalUser) {
+        isActivePlayer = false;
+      } else {
+        isActivePlayer = true;
+      }
+    }
 
     if(updated) {
       checkWin();
