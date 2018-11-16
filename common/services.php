@@ -2,6 +2,7 @@
 
 require_once("entities/game.php");
 require_once("entities/stats.php");
+require_once("util.php");
 
 class Services {
   public static function showOpenGames() {
@@ -86,6 +87,54 @@ class Services {
     }
 
     return $stats;
+  }
+
+  public static function leaderboard() {
+    require_once("common/soap-client.php");
+
+    $gamesString = $soapClient->leagueTable()->return;
+    $gameStrings = explode("\n", $gamesString);
+
+    $entries = array();
+
+    foreach($gameStrings as $gameString) {
+      $gameElems = explode(",", $gameString);
+      
+      $game = new Game();
+      $game->id = $gameElems[0];
+      $game->p1 = $gameElems[1];
+      $game->p2 = $gameElems[2];
+      $game->state = $gameElems[3];
+
+      $p1Stats = Util::findUsernameInStatsList($entries, $game->p1);
+      if(!$p1Stats) {
+        $stats = new Stats();
+        $stats->username = $game->p1;
+        array_push($entries, $stats);
+        $p1Stats = Util::findUsernameInStatsList($entries, $game->p1);
+      }
+
+      $p2Stats = Util::findUsernameInStatsList($entries, $game->p2);
+      if(!$p2Stats) {
+        $stats = new Stats();
+        $stats->username = $game->p2;
+        array_push($entries, $stats);
+        $p2Stats = Util::findUsernameInStatsList($entries, $game->p2);
+      }
+
+      if($game->state == "1") {
+        $p1Stats->wins++;
+        $p2Stats->losses++;
+      } else if($game->state == "2") {
+        $p1Stats->losses++;
+        $p2Stats->wins++;
+      } else if($game->state === "3") {
+        $p1Stats->draws++;
+        $p2Stats->draws++;
+      }
+    }
+
+    return $entries;
   }
 
 }
