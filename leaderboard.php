@@ -6,7 +6,7 @@
 
   require_once("common/services.php");
 
-  $openGames = Services::showOpenGames();
+  $stats = Services::leaderboard();
 ?>
 
 <!doctype html>
@@ -18,45 +18,38 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/custom.css">
 
-    <title>Tic tac toe</title>
+    <title>Leaderboard</title>
   </head>
 
   <body>
     <?php include("components/navbar.php") ?> 
   
     <div class="container">
-      <h1>Welcome!</h1>
-      <div class="top-buttons">
-        <a type="button" href="statistics.php" class="btn btn-info">Your statistics</a>
-        <a type="button" href="leaderboard.php" class="btn btn-secondary">Leaderboard</a>
-
-        <a type="button" href="actions/create-game.php" class="btn btn-success float-md-right">New game</a>
-      </div>
-
-      <h2>Open games</h2>
+      <h1>Leaderboard</h1>
       <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Username</th>
-          <th scope="col" class="join-col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-          foreach($openGames as $openGame) {
-            ?>
-              <tr>
-                <th scope="row"><?php echo $openGame->id ?></th>
-                <td><?php echo $openGame->p1 ?></td>
-                <td><a type="button" href="actions/join-game.php?gid=<?php echo $openGame->id ?>" class="btn btn-outline-primary btn-sm float-md-right">Join</a></td>
-              </tr>
-            <?php
-          }
-        ?>
-      </tbody>
-    </table>
-      
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Wins</th>
+            <th scope="col">Losses</th>
+            <th scope="col">Draws</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            foreach($stats as $stat) {
+              ?>
+                <tr>
+                  <th scope="row"><?php echo $stat->username ?></th>
+                  <td><?php echo $stat->wins ?></td>
+                  <td><?php echo $stat->losses ?></td>
+                  <td><?php echo $stat->draws ?></td>
+                </tr>
+              <?php
+            }
+          ?>
+        </tbody>
+      </table>
     </div>
   </body>
 
