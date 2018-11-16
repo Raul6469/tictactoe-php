@@ -134,7 +134,7 @@ class Services {
       }
     }
 
-    return $entries;
+    return Util::sortStatsList($entries);
   }
 
 }

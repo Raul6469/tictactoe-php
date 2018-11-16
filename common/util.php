@@ -7,4 +7,17 @@ class Util {
       }
     }
   }
+
+  public static function sortStatsList($list) {
+    function cmp($a, $b) {
+        if ($a->wins == $b->wins) {
+            return 0;
+        }
+        return ($a->wins < $b->wins) ? 1 : -1;
+    }
+
+    usort($list, "cmp");
+
+    return $list;
+  }
 }
