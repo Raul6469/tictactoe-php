@@ -46,3 +46,11 @@
 #turn-indicator > .card {
     background-color: #74e7ff;
 }
+
+.stats {
+    text-align: center;
+}
+
+.big-number {
+    font-size: 600%;
+}

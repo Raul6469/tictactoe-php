@@ -6,7 +6,7 @@
 
   require_once("common/services.php");
 
-  $openGames = Services::showOpenGames();
+  $stats = Services::getUserStats($_SESSION["user_id"], $_SESSION["username"]);
 ?>
 
 <!doctype html>
@@ -18,44 +18,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/custom.css">
 
-    <title>Tic tac toe</title>
+    <title>Your statistics</title>
   </head>
 
   <body>
     <?php include("components/navbar.php") ?> 
   
     <div class="container">
-      <h1>Welcome!</h1>
-      <div class="top-buttons">
-        <a type="button" href="statistics.php" class="btn btn-info">Your statistics</a>
-        <button type="button" class="btn btn-secondary">Leaderboard</button>
+      <h1>Your statistics</h1>
 
-        <a type="button" href="actions/create-game.php" class="btn btn-success float-md-right">New game</a>
+      <div class="row stats">
+        <div class="col">
+          <div class="big-number"><?php echo $stats->wins ?></div>
+          wins
+        </div>
+        <div class="col">
+          <div class="big-number"><?php echo $stats->losses ?></div>
+          losses
+        </div>
+        <div class="col">
+          <div class="big-number"><?php echo $stats->draws ?></div>
+          draws
+        </div>
       </div>
-
-      <h2>Open games</h2>
-      <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Username</th>
-          <th scope="col" class="join-col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-          foreach($openGames as $openGame) {
-            ?>
-              <tr>
-                <th scope="row"><?php echo $openGame->id ?></th>
-                <td><?php echo $openGame->p1 ?></td>
-                <td><a type="button" href="actions/join-game.php?gid=<?php echo $openGame->id ?>" class="btn btn-outline-primary btn-sm float-md-right">Join</a></td>
-              </tr>
-            <?php
-          }
-        ?>
-      </tbody>
-    </table>
       
     </div>
   </body>
