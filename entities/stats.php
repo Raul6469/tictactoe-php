@@ -1,5 +1,6 @@
 <?php
 class Stats {
+  public $username;
   public $wins;
   public $losses;
   public $draws;
