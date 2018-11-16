@@ -13,5 +13,6 @@ if ($result == "-1" || $result == "0") {
 } else {
   session_start();
   $_SESSION['user_id'] = $result;
+  $_SESSION['username'] = $_POST['username'];
   header('Location: ../');
 }
