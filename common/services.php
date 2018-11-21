@@ -50,11 +50,15 @@ class Services {
       "uid" => $uid
     );
 
+    $stats = new Stats();
+
     $gamesString = $soapClient->showAllMyGames($params)->return;
 
-    $gameStrings = explode("\n", $gamesString);
+    if (strpos($gamesString, 'ERROR') !== false) {
+      return $stats;
+    }
 
-    $stats = new Stats();
+    $gameStrings = explode("\n", $gamesString);
 
     foreach($gameStrings as $gameString) {
       $game = new Game();
@@ -93,9 +97,13 @@ class Services {
     require_once("common/soap-client.php");
 
     $gamesString = $soapClient->leagueTable()->return;
-    $gameStrings = explode("\n", $gamesString);
-
     $entries = array();
+
+    if (strpos($gamesString, 'ERROR') !== false) {
+      return $entries;
+    }
+
+    $gameStrings = explode("\n", $gamesString);
 
     foreach($gameStrings as $gameString) {
       $gameElems = explode(",", $gameString);
