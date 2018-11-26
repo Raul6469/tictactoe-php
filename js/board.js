@@ -6,20 +6,27 @@ let playerNumber;
 let isActivePlayer = false;
 
 $("document").ready(() => {
+  // We get the game id from the url and
+  // store it into gid variable
   url = new URL(window.location.href);
   gid = url.searchParams.get("gid");
 
+  // The player who created the game plays
+  // first
   if(url.searchParams.get("host") === "true") {
     playerNumber = "1";
     isActivePlayer = true;
     $("#turn-indicator").collapse("show");
   }
 
+  // We get the logged user id
   $.get("ajax/get-user.php", (user) => {
     globalUser = user;
 
+    // Handle square click
     $(".square").click((square) => {
       if(!isActivePlayer) {
+        // Player is not active
         return;
       }
       takeSquare(square.target.attributes.getNamedItem("x").value, square.target.attributes.getNamedItem("y").value);
@@ -35,6 +42,7 @@ function updateBoardDisplay() {
     let updated = false;
     data.forEach(move => {
       const square = $("td[x="+move.x+"][y="+move.y+"]");
+      // If the square value changes
       if(square.text() === "") {
         updated = true;
         if(move.pid === globalUser) {
@@ -45,6 +53,7 @@ function updateBoardDisplay() {
       }
     });
 
+    // Update turn indicator
     if(data.length > 0) {
       if(data[data.length - 1].pid === globalUser) {
         isActivePlayer = false;
@@ -55,6 +64,7 @@ function updateBoardDisplay() {
       }
     }
 
+    // We check win only if a move is played
     if(updated) {
       checkWin();
     }
@@ -68,8 +78,9 @@ function updateGameStatus() {
     globalState = data;
     const statusBox = $("#status");
     if (globalState === "-1") {
-      // We wait
+      // We wait for player to join
     } else if (globalState === "0") {
+      // Game has started
       $("#wait").hide();
       $(".board-container").show();
       statusBox.hide();
